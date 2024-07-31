@@ -12,7 +12,7 @@
         <div class="container my-5">
             <div class="row">
                 <div class="col-md-6 mx-auto d-grip gap-2">
-                    <form action="{{   url('librarian') }}" method="POST">
+                    <form action="{{   url('books')}}" method="POST">
                         @csrf
                         <div class="form-group mb-3">
                             <label>Title</label>
@@ -31,13 +31,16 @@
                         <input type="number" name="isbn" class="form-control">
                         </div>
                         <div class="form-group mb-3">
-                            <label>Birthdate</label>
+                            <label>Publihed Year</label>
                         <input type="date" name="published_year" class="form-control">
                         </div>
                         <div class="form-group mb-3">
-                            <button class="btn btn-primary">Save Changes</button>
+                            <button class="btn btn-primary">Add Book Info</button>
                         </div>
                     </form>
+                    @if (session('success'))
+                    <div> {{session('success')}}</div>
+                    @endif
                 </div>
             </div>
         </div>

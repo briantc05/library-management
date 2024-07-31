@@ -19,6 +19,7 @@
                             <th>Description</th>
                             <th>ISBN</th>
                             <th>Published Year</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,8 +31,8 @@
                             <td> {{ $book-> isbn }} </td>
                             <td> {{ $book-> published_year }} </td>
                             <td>
-                                <a href="{{ url('librarian', $book->id) }}/edit" class="btn btn-outline-success">Edit</a>
-                                <form action=" {{  url('librarian', $book->id) }}" method="POST">
+                                <a href="{{ url('books', $book->isbn) }}/edit" class="btn btn-outline-success">Edit</a>
+                                <form action=" {{  url('books', $book->isbn) }}" method="POST">
                                 @method('delete')
                                 @csrf
                                 <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Sure kana ba?')">Delete</button>

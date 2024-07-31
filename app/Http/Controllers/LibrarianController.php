@@ -13,7 +13,7 @@ class LibrarianController extends Controller
     {
         //
         $data['books'] = Books::all();
-        return view ('librarian.index', $data);
+        return view ('books.index', $data);
     }
 
     /**
@@ -21,7 +21,7 @@ class LibrarianController extends Controller
      */
     public function create()
     {
-        return view ('librarian.create');
+        return view ('books.create');
     }
 
     /**
@@ -29,12 +29,22 @@ class LibrarianController extends Controller
      */
     public function store(Request $request)
     {
-        $books = new Books();
-        $books->title = $request['title'];
-        $books->author = $request['author'];
-        $books->description = $request['description'];
-        $books->isbn = $request['isbn'];
-        $books->published_year = $request['published_year'];
+        $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'description' => 'required',
+            'isbn' => 'required|unique:books,isbn',
+            'published_year' => 'required',
+        ]);
+        $book = new Books();
+        $book->title = $request['title'];
+        $book->author = $request['author'];
+        $book->description = $request['description'];
+        $book->isbn = $request['isbn'];
+        $book->published_year = $request['published_year'];
+        $book->save();
+
+        return back()->with('success', 'Book Succesfully Created');
 
     }
 
@@ -51,7 +61,9 @@ class LibrarianController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        $data['books'] = Books::find($id);
+        return view ('books.edit', $data);
     }
 
     /**
@@ -60,6 +72,13 @@ class LibrarianController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $book = Books::find($id);
+        $book->title = $request['title'];
+        $book->author = $request['author'];
+        $book->description = $request['description'];
+        $book->isbn = $request['isbn'];
+        $book->published_year = $request['published_year'];
+        $book->save();
     }
 
     /**
