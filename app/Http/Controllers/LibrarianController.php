@@ -33,7 +33,7 @@ class LibrarianController extends Controller
             'title' => 'required',
             'author' => 'required',
             'description' => 'required',
-            'isbn' => 'required|unique:books,isbn',
+            'isbn' => 'required|unique:books',
             'published_year' => 'required',
         ]);
         $book = new Books();
@@ -51,7 +51,7 @@ class LibrarianController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($isbn)
     {
         //
     }
@@ -59,33 +59,44 @@ class LibrarianController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($isbn)
     {
 
-        $data['books'] = Books::find($id);
+        $data['books'] = Books::find($isbn);
         return view ('books.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $isbn)
     {
-        //
-        $book = Books::find($id);
+        $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'description' => 'nullable',
+            'published_year' => 'required',
+        ]);
+
+        $book = Books::find($isbn);
         $book->title = $request['title'];
         $book->author = $request['author'];
         $book->description = $request['description'];
-        $book->isbn = $request['isbn'];
+        // $book->isbn = $request['isbn'];
         $book->published_year = $request['published_year'];
         $book->save();
+
+        return redirect()->to('books');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($isbn)
     {
-        //
+        $book = Books::find($isbn);
+        $book->delete();
+
+        return redirect()->to('books');
     }
 }

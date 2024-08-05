@@ -16,10 +16,9 @@
                         <tr>
                             <th>Title</th>
                             <th>Author</th>
-                            <th>Description</th>
                             <th>ISBN</th>
                             <th>Published Year</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,7 +26,6 @@
                         <tr>
                             <td> {{ $book-> title }} </td>
                             <td> {{ $book-> author }} </td>
-                            <td> {{ $book-> description }} </td>
                             <td> {{ $book-> isbn }} </td>
                             <td> {{ $book-> published_year }} </td>
                             <td>

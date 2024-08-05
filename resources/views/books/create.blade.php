@@ -18,21 +18,38 @@
                             <label>Title</label>
                         <input type="text" name="title" class="form-control">
                         </div>
+                        @error('title')
+                            <div> {{ $message }} </div>
+                        @enderror
                         <div class="form-group mb-3">
                             <label>Author</label>
                         <input type="text" name="author" class="form-control">
+                        <div>
+                        </div>
+                        @error('author')
+                            <div> {{ $message }} </div>
+                        @enderror
                         </div>
                         <div class="form-group mb-3">
                             <label>Description</label>
                         <input type="text" name="description" class="form-control">
+                        @error('description')
+                            <div> {{ $message }} </div>
+                        @enderror
                         </div>
                         <div class="form-group mb-3">
                             <label>ISBN # </label>
-                        <input type="number" name="isbn" class="form-control">
+                        <input type="text" name="isbn" class="form-control">
+                        @error('isbn')
+                            <div> {{ $message }} </div>
+                        @enderror
                         </div>
                         <div class="form-group mb-3">
                             <label>Publihed Year</label>
                         <input type="date" name="published_year" class="form-control">
+                        @error('published_year')
+                            <div> {{ $message }} </div>
+                        @enderror
                         </div>
                         <div class="form-group mb-3">
                             <button class="btn btn-primary">Add Book Info</button>
